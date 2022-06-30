@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 
 function App() {
-  const [name, setCountryName] = useState([]);
+  const [countryName, setCountryName] = useState([]);
 
   const handleCountryNameChange = (e) => {
     setCountryName(e.target.value);
-    />
-
-    } 
   };
+
   return (
     <div>
       <TextField
-        
         id="standard-basic"
         label="Search Countries"
         variant="standard"

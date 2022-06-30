@@ -6,14 +6,6 @@ function App() {
 
   const handleCountryNameChange = (e) => {
     setCountryName(e.target.value);
-    if(name && 0){
-      <TextField
-      name='name'
-      label='Name'
-      placeholder='Type your name'
-      value={this.state.fields.name}
-      onChange={this.onChange}
-      error={true} 
     />
 
     } 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 
 function App() {
-  const [countryName, setCountryName] = useState([]);
+  const [countryName, setCountryName] = useState("");
 
   const handleCountryNameChange = (e) => {
     setCountryName(e.target.value);

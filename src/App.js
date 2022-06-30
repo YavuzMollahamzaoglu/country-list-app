@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { TextField, Button } from "@mui/material";
 
 function App() {
+  const [name, setCountryName] = useState([]);
+
+  const handleCountryNameChange = (e) => {
+    setCountryName(e.target.value);
+    if(name && 0){
+      <TextField
+      name='name'
+      label='Name'
+      placeholder='Type your name'
+      value={this.state.fields.name}
+      onChange={this.onChange}
+      error={true} 
+    />
+
+    } 
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TextField
+        
+        id="standard-basic"
+        label="Search Countries"
+        variant="standard"
+        onChange={handleCountryNameChange}
+      />
+      <Button variant="contained">Search</Button>
     </div>
   );
 }

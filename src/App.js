@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import CountryDetail from "./Components/CountryDetail";
-import PeopleInfo from "./Components/PeopleInfo";
-import PersonInfo from "./Components/PersonInfo";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function App() {
   const [countryName, setCountryName] = useState("");
   const [country, setCountry] = useState();
   const [countryNames, setCountryNames] = useState([]);
 
-  const handleChange = (event) => {
-    setCountryName(event.target.value);
-  };
   useEffect(() => {
     fetch(`https://restcountries.com/v3/all`)
       .then((response) => {
@@ -31,21 +28,13 @@ function App() {
       });
   }, []);
 
-  const people = [
-    {
-      name: "Onur",
-      lastName: "Keniş",
-      birth: { date: "15 Şubat", place: "Adana" },
-    },
-    {
-      name: "Yavuz",
-      lastName: "Mollahamzaoğlu",
-      birth: { date: "18 Haziran", place: "Rize" },
-    },
-  ];
+  const handleChangeCountryName = (event) => {
+    setCountryName(event.target.value);
+  };
 
-  const handleCountryNameChange = (e) => {
-    setCountryName(e.target.value);
+  const handleDeleteIconClick = () => {
+    setCountry(null);
+    setCountryName(null);
   };
 
   const handleSearchClick = () => {
@@ -58,24 +47,6 @@ function App() {
 
   return (
     <div>
-      <TextField
-        id="standard-basic"
-        label="Select Countries"
-        variant="standard"
-        onChange={handleCountryNameChange}
-      />
-
-      <Button variant="contained" onClick={handleSearchClick}>
-        Search
-      </Button>
-
-      {country && <CountryDetail country={country} />}
-      <PeopleInfo people={people} />
-
-      {people.map((val) => {
-        return <PersonInfo person={val} />;
-      })}
-
       <FormControl sx={{ m: 1, minWidth: 150 }}>
         <InputLabel id="country-select-small">Countries</InputLabel>
         <Select
@@ -83,7 +54,7 @@ function App() {
           id="country-select-small"
           value={countryName}
           label="Coun"
-          onChange={handleChange}
+          onChange={handleChangeCountryName}
         >
           <MenuItem value="">
             <em>None</em>
@@ -93,6 +64,23 @@ function App() {
           })}
         </Select>
       </FormControl>
+
+      <Button
+        variant="contained"
+        onClick={handleSearchClick}
+        disabled={!countryName}
+      >
+        Search
+      </Button>
+
+      {country && (
+        <>
+          <IconButton aria-label="delete" onClick={handleDeleteIconClick}>
+            <DeleteIcon />
+          </IconButton>
+          <CountryDetail country={country} />
+        </>
+      )}
     </div>
   );
 }
